@@ -1,0 +1,14 @@
+- name: Install global yarn
+  shell: 
+    cmd: fish -c 'nvm use {{ node_version }} && npm install -g yarn'
+  tags: 
+  - ubuntu
+  - npm-packages
+
+- name: Install global typescript lsp and eslint_d
+  shell: 
+    cmd: fish -c 'nvm use {{ node_version }} && npm install -g typescript typescript-language-server eslint_d prettier'
+  tags: 
+  - ubuntu
+  - npm-packages
+

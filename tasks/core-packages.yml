@@ -1,0 +1,106 @@
+- name: Install core cli tools
+  become: true
+  apt:
+    name:
+    - build-essential
+    - fzf
+    - ranger
+    - keychain # wsl2 ssh agent persistence
+  tags: 
+  - ubuntu
+  - core
+
+- name: Ensure .local bin folder exists
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.local/bin"
+    state: directory
+  tags: 
+  - ubuntu
+  - core
+
+- name: Register architecture
+  shell: dpkg --print-architecture
+  register: curr_arch
+  tags: 
+  - ubuntu
+  - core
+
+- name: Register latest fd version
+  shell: |
+    curl --silent "https://api.github.com/repos/sharkdp/fd/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")' | cut -c 2-
+  register: fd_ver
+  tags: 
+  - ubuntu
+  - core
+
+- name: install latest fd deb release
+  become: true
+  apt:
+    deb: 'https://github.com/sharkdp/fd/releases/latest/download/fd_{{ fd_ver.stdout }}_{{ curr_arch.stdout }}.deb'
+  tags:
+  - ubuntu
+  - core
+
+- name: Register latest batcat version
+  shell: |
+    curl --silent "https://api.github.com/repos/sharkdp/bat/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")' | cut -c 2-
+  register: bat_ver
+  tags: 
+  - ubuntu
+  - core
+
+- name: Install latest batcat deb release
+  become: true
+  apt:
+    deb: 'https://github.com/sharkdp/bat/releases/latest/download/bat_{{ bat_ver.stdout }}_{{ curr_arch.stdout }}.deb'
+  tags:
+  - ubuntu
+  - core
+
+- name: Register latest ripgrep version
+  shell: |
+    curl --silent "https://api.github.com/repos/BurntSushi/ripgrep/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")'
+  register: fd_ver
+  tags: 
+  - ubuntu
+  - core
+
+- name: install latest ripgrep deb release
+  become: true
+  apt:
+    # Only appears to have amd64 architecture
+    deb: 'https://github.com/BurntSushi/ripgrep/releases/latest/download/ripgrep_{{ fd_ver.stdout }}_amd64.deb'
+  tags:
+  - ubuntu
+  - core
+
+# May need these again at some point
+
+#- name: Install ripgrep
+#  become: true
+#  apt:
+#    name:
+#    - ripgrep
+#    #dpkg_options: 'force-overwrite'
+#  tags: 
+#  - ubuntu
+#  - core
+
+#- name: Assign path of fdfind
+#  shell: which fdfind
+#  register: fdfind_path
+#  tags: 
+#  - ubuntu
+#  - core
+#
+#- name: Link fdfind into .local bin with proper alias
+#  file:
+#    src: '{{ item.src_dir }}'
+#    path: "{{ lookup('env', 'HOME') }}/.local/bin/{{ item.dest_name }}"
+#    state: link
+#  with_items:
+#  - { src_dir: '{{ fdfind_path.stdout }}', dest_name: fd }
+#  tags: 
+#  - ubuntu
+#  - core
+

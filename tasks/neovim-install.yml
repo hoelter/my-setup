@@ -1,0 +1,46 @@
+- name: Remove binary symlink if it exists
+  become: true
+  file:
+    path: /usr/local/bin/nvim
+    state: absent
+  tags: 
+  - neovim-install
+  - neovim-clean
+  - ubuntu
+
+- name: Remove Neovim install dir if it exists
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.local/nvim-linux64"
+    state: absent
+  tags:
+  - neovim-install
+  - neovim-clean
+  - ubuntu
+
+- name: Ensure .local bin folder exists
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.local/bin"
+    state: directory
+  tags: 
+  - neovim-install
+  - ubuntu
+
+- name: Download Neovim tarball and unarchive into local bin
+  unarchive:
+    src: https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
+    dest: "{{ lookup('env', 'HOME') }}/.local"
+    remote_src: yes
+  tags: 
+  - neovim-install
+  - ubuntu
+
+- name: Symlink neovim binary
+  become: true
+  file:
+    src: "{{ lookup('env', 'HOME') }}/.local/nvim-linux64/bin/nvim"
+    path: /usr/local/bin/nvim 
+    state: link
+  tags: 
+  - neovim-install
+  - ubuntu
+

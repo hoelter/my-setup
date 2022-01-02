@@ -1,0 +1,30 @@
+- hosts: localhost
+  connection: local
+  vars:
+    node_version: 14
+  pre_tasks:
+  - name: Update cache and ensure some core utils are installed
+    become: yes
+    apt:
+      update_cache: true
+      name:
+      - build-essential
+      - git
+      - curl
+    tags: 
+    - pre
+    - ubuntu
+  tasks:
+  - import_tasks: tasks/core-packages.yml
+  - import_tasks: tasks/tmux-install.yml
+  - import_tasks: tasks/fish.yml
+  - import_tasks: tasks/neovim-compile.yml
+  - import_tasks: tasks/neovim-install.yml
+  - import_tasks: tasks/node.yml
+  - import_tasks: tasks/npm-packages.yml
+  - import_tasks: tasks/setup-dotnet.yml
+  - import_tasks: tasks/setup-omnisharp-lsp.yml
+  - import_tasks: tasks/dotfiles-setup.yml
+  - import_tasks: tasks/neovim-post-install.yml
+  - import_tasks: tasks/githubcli.yml
+

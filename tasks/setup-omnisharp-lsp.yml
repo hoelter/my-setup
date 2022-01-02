@@ -1,0 +1,32 @@
+- name: Remove omnisharp binary dir if it exists
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.local/omnisharp"
+    state: absent
+  tags:
+    - ubuntu
+    - omnisharp
+
+- name: Ensure omnisharp dir target path exists
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.local/omnisharp"
+    state: directory
+  tags: 
+  - ubuntu
+  - omnisharp
+
+- name: Download omnisharp tarball and unarchive into local folder
+  unarchive:
+    src: https://github.com/OmniSharp/omnisharp-roslyn/releases/latest/download/omnisharp-linux-x64.tar.gz
+    dest: "{{ lookup('env', 'HOME') }}/.local/omnisharp"
+    remote_src: yes
+  tags: 
+  - ubuntu
+  - omnisharp
+
+#- name: Ensure omnisharp dir exists for global settings
+#  file:
+#    path: "{{ lookup('env', 'HOME') }}/.omnisharp"
+#    state: directory
+#  tags: 
+#  - ubuntu
+#  - omnisharp

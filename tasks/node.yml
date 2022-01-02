@@ -1,0 +1,22 @@
+- name: Ensure nvm dir exists for install
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.local/share/nvm/"
+    state: directory
+  tags: 
+  - ubuntu
+  - node
+
+- name: Install fisher nvm plugin
+  shell: 
+    cmd: fish -c 'fisher install jorgebucaran/nvm.fish'
+  tags: 
+  - ubuntu
+  - node
+
+- name: Install node with nvm
+  shell: 
+    cmd: fish -c 'nvm install {{ node_version }} && set -U nvm_default_version {{ node_version }}'
+  tags: 
+  - ubuntu
+  - node
+

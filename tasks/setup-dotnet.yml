@@ -1,0 +1,31 @@
+# https://docs.microsoft.com/en-us/dotnet/core/install/linux-ubuntu
+
+- name: Install packages-microsoft-prod.deb
+  become: true
+  apt:
+    deb: https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb
+  tags:
+    - ubuntu
+    - dotnet
+
+- name: Install dotnet required package
+  become: true
+  apt:
+    update_cache: true
+    name: apt-transport-https
+  tags:
+    - ubuntu
+    - dotnet
+
+- name: Install dotnet SDKs
+  become: true
+  apt:
+    update_cache: true
+    name:
+    - dotnet-sdk-6.0
+    - dotnet-sdk-5.0
+    - dotnet-sdk-3.1
+  tags:
+    - ubuntu
+    - dotnet
+

@@ -1,0 +1,73 @@
+- name: Remove tmux if installed
+  become: true
+  apt:
+    name: tmux
+    state: absent
+  tags: 
+  - ubuntu
+  - tmux
+
+- name: Install required tmux build packages
+  become: true
+  apt:
+    name:
+    - libevent-dev 
+    - ncurses-dev 
+    - bison
+    - pkg-config
+    - build-essential
+    - checkinstall
+  tags: 
+  - ubuntu
+  - tmux
+
+- name: Register latest tmux version
+  shell: |
+    curl --silent "https://api.github.com/repos/tmux/tmux/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")'
+  register: tmux_ver
+  tags: 
+  - ubuntu
+  - tmux
+
+- name: Create tmux install directory
+  become: true
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.tmux-install"
+    state: directory
+  tags:
+  - ubuntu
+  - tmux
+
+- name: Download tmux tarball and unarchive into .tmux-install
+  become: true
+  unarchive:
+    src: 'https://github.com/tmux/tmux/releases/latest/download/tmux-{{ tmux_ver.stdout }}.tar.gz'
+    dest: "{{ lookup('env', 'HOME') }}/.tmux-install"
+    remote_src: yes
+  tags: 
+  - ubuntu
+  - tmux
+
+- name: Build tmux from tarball
+  become: true
+  shell: "cd {{ lookup('env', 'HOME') }}/.tmux-install/tmux-{{ tmux_ver.stdout }} && ./configure && make"
+  tags:
+  - ubuntu
+  - tmux
+
+- name: Install tmux
+  become: true
+  shell: "cd {{ lookup('env', 'HOME') }}/.tmux-install/tmux-{{ tmux_ver.stdout }} && checkinstall -y"
+  tags:
+  - ubuntu
+  - tmux
+
+- name: Remove tmux install directory
+  become: true
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.tmux-install"
+    state: absent
+  tags:
+  - ubuntu
+  - tmux
+

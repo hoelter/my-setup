@@ -1,0 +1,20 @@
+# Link to authenticate the device if it doesn't auto-open browser: https://github.com/login/device
+#
+# After this task is run, can auth against github which can create and push a new ssh token automatically
+
+- name: Curl github cli package sources
+  become: true
+  shell: curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+  tags: 
+  - ubuntu
+  - github-cli
+
+- name: Install github cli
+  become: yes
+  apt:
+    update_cache: true
+    name: gh
+  tags: 
+  - ubuntu
+  - github-cli
+

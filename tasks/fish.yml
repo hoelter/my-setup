@@ -1,0 +1,35 @@
+- name: Add fish ppa
+  become: yes
+  apt_repository:
+    repo: ppa:fish-shell/release-3
+    state: present
+  tags: 
+  - ubuntu
+  - fish
+  - node
+
+- name: Install fish
+  become: yes
+  apt:
+    name: fish
+  tags: 
+  - ubuntu
+  - fish
+  - node
+
+- name: Assign fisher dir variable
+  stat:
+    path: "{{ lookup('env', 'HOME') }}/.config/fish/functions/fisher.fish"
+  register: fisher_func
+  tags: 
+  - ubuntu
+  - fish
+  - node
+
+- name: Install fisher plugin manager
+  shell: fish -c "curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher"
+  when: fisher_func.stat.exists == False
+  tags: 
+  - ubuntu
+  - fish
+  - node
