@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
 
-docker run --rm --mount type=bind,source=$(pwd),target=/home/docker/my-setup,readonly -it my-setup-bare bash
+#docker run --rm --mount type=bind,source=$(pwd),target=/home/docker/my-setup,readonly -it my-setup-bare bash -c "./my-setup/ansible-install; bash"
+docker run --rm -it my-setup-bare bash -c "bash <(curl -s https://raw.githubusercontent.com/hoelter/my-setup/master/ansible-install); bash"
 

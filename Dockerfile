@@ -16,6 +16,7 @@ RUN apt update && apt install -y \
     && apt install -y ansible
 
 ENV HOME /home/docker
+ENV USER docker
 
 RUN useradd --create-home --home-dir $HOME docker \
     && echo "docker:docker" | chpasswd && adduser docker sudo
