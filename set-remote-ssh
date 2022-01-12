@@ -1,0 +1,8 @@
+#!usr/bin/env bash
+
+remote=$(git remote -v | grep 'https')
+
+if [[ $remote ]]; then
+    echo 'Switching my-setup remote from https to ssh.'
+    git remote set-url origin git@github.com:hoelter/my-setup.git
+fi
