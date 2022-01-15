@@ -3,7 +3,6 @@
   apt:
     name:
     - build-essential
-    - fzf
     - ranger
     - keychain # wsl2 ssh agent persistence
   tags: 
