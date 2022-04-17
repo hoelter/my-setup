@@ -8,6 +8,24 @@
   - neovim-clean
   - ubuntu
 
+- name: Remove shada folder
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.local/share/nvim/shada"
+    state: absent
+  tags:
+  - ubuntu
+  - neovim-install
+  - neovim-clean
+
+- name: Remove site folder
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.local/share/nvim/site"
+    state: absent
+  tags:
+  - ubuntu
+  - neovim-install
+  - neovim-clean
+
 - name: Remove Neovim install dir if it exists
   file:
     path: "{{ lookup('env', 'HOME') }}/.local/nvim-linux64"

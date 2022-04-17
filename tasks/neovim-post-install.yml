@@ -1,5 +1,13 @@
+- name: Remove TreeSitterInfo
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.local/share/nvim/tree-sitter-vim"
+    state: absent
+  tags:
+  - ubuntu
+  - neovim-post
+  - neovim-clean
+
 - name: Remove Plugins
-  become: true
   file:
     path: "{{ lookup('env', 'HOME') }}/.local/share/nvim/plugged"
     state: absent
@@ -9,7 +17,6 @@
   - neovim-clean
 
 - name: Remove Vim-Plug
-  become: true
   file:
     path: "{{ lookup('env', 'HOME') }}/.local/share/nvim/site/autoload/plug.vim"
     state: absent
@@ -37,3 +44,9 @@
   tags:
   - ubuntu
   - neovim-post
+
+# - name: Ensure Treesitter installed
+#   shell: nvim --headless +'TSUpdateSync' +qall
+#   tags:
+#   - ubuntu
+#   - neovim-post
