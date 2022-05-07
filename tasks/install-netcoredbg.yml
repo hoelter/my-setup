@@ -1,0 +1,15 @@
+- name: Remove netcoredbg binary dir if it exists
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.local/netcoredbg"
+    state: absent
+  tags:
+  - netcoredbg
+
+- name: Download netcoredbg tarball and unarchive into local folder
+  unarchive:
+    src: https://github.com/Samsung/netcoredbg/releases/latest/download/netcoredbg-linux-amd64.tar.gz
+    dest: "{{ lookup('env', 'HOME') }}/.local"
+    remote_src: yes
+  tags: 
+  - netcoredbg
+

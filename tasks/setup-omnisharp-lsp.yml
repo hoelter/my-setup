@@ -3,8 +3,8 @@
     path: "{{ lookup('env', 'HOME') }}/.local/omnisharp"
     state: absent
   tags:
-    - ubuntu
-    - omnisharp
+  - ubuntu
+  - omnisharp
 
 - name: Ensure omnisharp dir target path exists
   file:
