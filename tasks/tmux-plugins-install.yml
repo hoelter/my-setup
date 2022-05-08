@@ -4,6 +4,8 @@
     state: absent
   tags:
   - ubuntu
+  - core
+  - tmux
   - tmux-plugins
 
 - name: Create tmux plugins directory
@@ -12,6 +14,8 @@
     state: directory
   tags:
   - ubuntu
+  - core
+  - tmux
   - tmux-plugins
 
 - name: Clone tmux plugin manager
@@ -20,5 +24,7 @@
     dest: "{{ lookup('env', 'HOME') }}/.local/share/tmux/plugins/tpm"
   tags:
   - ubuntu
+  - core
+  - tmux
   - tmux-plugins
 

@@ -1,0 +1,28 @@
+- name: Remove lf binary if it exists
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.local/bin/lf"
+    state: absent
+  tags:
+  - ubuntu
+  - core
+  - lf
+
+- name: Ensure bin dir exists
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.local/bin"
+    state: directory
+  tags: 
+  - ubuntu
+  - core
+  - lf
+
+- name: Download lf tarball and unarchive into bin dir
+  unarchive:
+    src: https://github.com/gokcehan/lf/releases/latest/download/lf-linux-amd64.tar.gz
+    dest: "{{ lookup('env', 'HOME') }}/.local/bin"
+    remote_src: yes
+  tags: 
+  - ubuntu
+  - core
+  - lf
+

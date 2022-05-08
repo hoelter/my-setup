@@ -3,7 +3,6 @@
   apt:
     name:
     - build-essential
-    - ranger
     - keychain # wsl2 ssh agent persistence
   tags: 
   - ubuntu
@@ -23,6 +22,18 @@
   tags: 
   - ubuntu
   - core
+  - fd
+  - batcat
+
+- name: Remove fd if installed
+  become: true
+  apt:
+    name: fd
+    state: absent
+  tags:
+  - ubuntu
+  - core
+  - fd
 
 - name: Register latest fd version
   shell: |
@@ -31,6 +42,7 @@
   tags: 
   - ubuntu
   - core
+  - fd
 
 - name: install latest fd deb release
   become: true
@@ -39,6 +51,17 @@
   tags:
   - ubuntu
   - core
+  - fd
+
+- name: Remove bat if installed
+  become: true
+  apt:
+    name: bat
+    state: absent
+  tags:
+  - ubuntu
+  - core
+  - batcat
 
 - name: Register latest batcat version
   shell: |
@@ -47,6 +70,7 @@
   tags: 
   - ubuntu
   - core
+  - batcat
 
 - name: Install latest batcat deb release
   become: true
@@ -55,23 +79,36 @@
   tags:
   - ubuntu
   - core
+  - batcat
+
+- name: Remove ripgrep if installed
+  become: true
+  apt:
+    name: ripgrep
+    state: absent
+  tags:
+  - ubuntu
+  - core
+  - rg
 
 - name: Register latest ripgrep version
   shell: |
     curl --silent "https://api.github.com/repos/BurntSushi/ripgrep/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")'
-  register: fd_ver
+  register: rg_ver
   tags: 
   - ubuntu
   - core
+  - rg
 
 - name: install latest ripgrep deb release
   become: true
   apt:
     # Only appears to have amd64 architecture
-    deb: 'https://github.com/BurntSushi/ripgrep/releases/latest/download/ripgrep_{{ fd_ver.stdout }}_amd64.deb'
+    deb: 'https://github.com/BurntSushi/ripgrep/releases/latest/download/ripgrep_{{ rg_ver.stdout }}_amd64.deb'
   tags:
   - ubuntu
   - core
+  - rg
 
 # May need these again at some point
 

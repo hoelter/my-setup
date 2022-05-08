@@ -4,6 +4,7 @@
     state: absent
   tags: 
   - ubuntu
+  - core
   - fzf
 
 - name: Remove binary symlink for fzf-tmux 
@@ -12,6 +13,7 @@
     state: absent
   tags: 
   - ubuntu
+  - core
   - fzf
 
 - name: Remove symlink for fish key-bindings
@@ -20,6 +22,7 @@
     state: absent
   tags: 
   - ubuntu
+  - core
   - fzf
 
 - name: Ensure local binary dir is created
@@ -28,6 +31,7 @@
     state: directory
   tags:
   - ubuntu
+  - core
   - fzf
 
 - name: Clone fzf
@@ -39,12 +43,14 @@
     depth: 1
   tags:
   - ubuntu
+  - core
   - fzf
 
 - name: Install fzf
   shell: cd {{ lookup('env', 'HOME') }}/.local/fzf  && ./install --bin
   tags:
   - ubuntu
+  - core
   - fzf
 
 - name: Create binary symlink for fzf
@@ -54,6 +60,7 @@
     state: link
   tags: 
   - ubuntu
+  - core
   - fzf
 
 - name: Create binary symlink for fzf-tmux 
@@ -63,6 +70,7 @@
     state: link
   tags: 
   - ubuntu
+  - core
   - fzf
 
 - name: Ensure fish functions dir is created
@@ -71,6 +79,7 @@
     state: directory
   tags:
   - ubuntu
+  - core
   - fzf
 
 - name: Create symlink for fish key-bindings
@@ -80,4 +89,5 @@
     state: link
   tags: 
   - ubuntu
+  - core
   - fzf

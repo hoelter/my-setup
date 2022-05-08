@@ -5,6 +5,7 @@
     state: absent
   tags: 
   - ubuntu
+  - core
   - tmux
 
 - name: Install required tmux build packages
@@ -19,6 +20,7 @@
     - checkinstall
   tags: 
   - ubuntu
+  - core
   - tmux
 
 - name: Register latest tmux version
@@ -27,6 +29,7 @@
   register: tmux_ver
   tags: 
   - ubuntu
+  - core
   - tmux
 
 - name: Create tmux install directory
@@ -36,6 +39,7 @@
     state: directory
   tags:
   - ubuntu
+  - core
   - tmux
 
 - name: Download tmux tarball and unarchive into .tmux-install
@@ -46,6 +50,7 @@
     remote_src: yes
   tags: 
   - ubuntu
+  - core
   - tmux
 
 - name: Build tmux from tarball
@@ -53,6 +58,7 @@
   shell: "cd {{ lookup('env', 'HOME') }}/.tmux-install/tmux-{{ tmux_ver.stdout }} && ./configure && make"
   tags:
   - ubuntu
+  - core
   - tmux
 
 - name: Install tmux
@@ -60,6 +66,7 @@
   shell: "cd {{ lookup('env', 'HOME') }}/.tmux-install/tmux-{{ tmux_ver.stdout }} && checkinstall -y"
   tags:
   - ubuntu
+  - core
   - tmux
 
 - name: Remove tmux install directory
@@ -69,5 +76,6 @@
     state: absent
   tags:
   - ubuntu
+  - core
   - tmux
 
