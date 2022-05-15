@@ -4,6 +4,8 @@
     name:
     - build-essential
     - keychain # wsl2 ssh agent persistence
+    - urlview
+    - golang-go
   tags: 
   - ubuntu
   - core
