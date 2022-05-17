@@ -4,8 +4,9 @@
     name:
     - build-essential
     - keychain # wsl2 ssh agent persistence
-    - urlview
-    - golang-go
+    - urlview # tmux url plugin support
+    - golang-go # nvim hex highlighting plugin support
+    - direnv
   tags: 
   - ubuntu
   - core

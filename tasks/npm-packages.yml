@@ -12,3 +12,8 @@
   - ubuntu
   - npm-packages
 
+- name: Update global npm packages
+  shell: 
+    cmd: fish -c 'npm update -g typescript typescript-language-server eslint_d prettier'
+  tags: 
+  - npm-package-updates

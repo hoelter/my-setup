@@ -33,3 +33,18 @@
   - ubuntu
   - fish
   - node
+
+- name: Ensure conf.d directory created
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.config/fish/conf.d"
+    state: directory
+  tags:
+  - ubuntu
+  - fish
+  - node
+
+- name: Update fisher plugins
+  shell: fish -c "fisher update"
+  when: fisher_func.stat.exists == True
+  tags:
+  - fish
