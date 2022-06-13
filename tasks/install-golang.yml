@@ -1,0 +1,23 @@
+# nvim hex highlighting plugin support, pistol install
+- name: Add golang ppa
+  become: yes
+  apt_repository:
+    repo: ppa:longsleep/golang-backports
+    state: present
+  tags: 
+  - ubuntu
+  - core
+  - golang
+  - pistol
+
+- name: Install golang
+  become: yes
+  apt:
+    name: golang-go
+  tags: 
+  - ubuntu
+  - core
+  - golang
+  - pistol
+
+# Install pistol env CGO_ENABLED=1 GO111MODULE=on go install github.com/doronbehar/pistol/cmd/pistol@latest

@@ -16,6 +16,31 @@
   - ubuntu
   - dotfiles
 
+# Ensure certain config directories are created so that they're not symlinked in by stow
+- name: Ensure fish functions dir is created
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.config/fish/functions"
+    state: directory
+  tags:
+  - ubuntu
+  - dotfiles
+
+- name: Ensure fish conf.d dir is created
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.config/fish/conf.d"
+    state: directory
+  tags:
+  - ubuntu
+  - dotfiles
+
+- name: Ensure completions dir is created
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.config/fish/completions"
+    state: directory
+  tags:
+  - ubuntu
+  - dotfiles
+
 - name: Stow dotfiles
   shell: cd {{ lookup('env', 'HOME') }}/.dotfiles && ./ubuntu-install
   tags:

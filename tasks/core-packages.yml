@@ -4,12 +4,13 @@
     name:
     - build-essential
     - keychain # wsl2 ssh agent persistence
-    - urlview # tmux url plugin support
-    - golang-go # nvim hex highlighting plugin support
     - direnv
+    - moreutils # https://rentes.github.io/unix/utilities/2015/07/27/moreutils-package/
+      #- httpie -- consider adding through install steps here: https://httpie.io/docs/cli/debian-and-ubuntu
   tags: 
   - ubuntu
   - core
+  - core-apt
 
 - name: Ensure .local bin folder exists
   file:

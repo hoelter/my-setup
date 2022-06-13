@@ -16,11 +16,13 @@
     - ubuntu
   tasks:
   - import_tasks: tasks/core-packages.yml
+  - import_tasks: tasks/install-golang.yml
   - import_tasks: tasks/tmux-install.yml
   - import_tasks: tasks/tmux-plugins-install.yml
   - import_tasks: tasks/fish.yml
   - import_tasks: tasks/fzf-install.yml
   - import_tasks: tasks/lf-listfiles-install.yml
+  - import_tasks: tasks/install-pistol.yml
   - import_tasks: tasks/neovim-compile.yml
   - import_tasks: tasks/neovim-install.yml
   - import_tasks: tasks/node.yml

@@ -1,3 +1,14 @@
+- name: Install plugin dependencies
+  become: true
+  apt:
+    name:
+    - urlview # tmux url plugin support
+  tags: 
+  - ubuntu
+  - core
+  - tmux
+  - tmux-plugins
+
 - name: Remove tmux plugins directory
   file:
     path: "{{ lookup('env', 'HOME') }}/.local/share/tmux/plugins"

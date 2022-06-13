@@ -1,0 +1,17 @@
+- name: Install pistol dependencies
+  become: true
+  apt:
+    name:
+    - libmagic-dev # needed to support magicmime used for identifying the mimetypes
+    - poppler-utils # pdftotext
+  tags: 
+  - ubuntu
+  - core
+  - pistol
+
+- name: Install Plugins
+  shell: "env GOPATH={{ lookup('env', 'HOME') }}/.go CGO_ENABLED=1 GO111MODULE=on go install github.com/doronbehar/pistol/cmd/pistol@latest"
+  tags: 
+  - ubuntu
+  - core
+  - pistol
