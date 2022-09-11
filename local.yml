@@ -35,4 +35,5 @@
   - import_tasks: tasks/docker-install.yml
   - import_tasks: tasks/install-netcoredbg.yml
   - import_tasks: tasks/android-studio-install.yml
+  - import_tasks: tasks/rider-install.yml
 

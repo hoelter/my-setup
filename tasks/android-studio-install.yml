@@ -31,17 +31,6 @@
   tags: 
   - android-studio
 
-- name: "Fetch android studio dl page"
-  uri:
-    return_content: true
-    url: 'https://developer.android.com/studio'
-  register: android_studio_download_page
-  when:
-  - ansible_os_family != 'Windows'
-  - android_studio_path.stat.exists == False
-  tags: 
-  - android-studio
-
 - name: "Find latest android studio version for linux"
   set_fact:
     android_studio_ver: '{{ android_studio_download_page.content | regex_search("android-studio-(.*)-linux.tar.gz") | regex_replace("android-studio-(.*)-linux.tar.gz", "\1") }}'
@@ -78,7 +67,5 @@
   - android_studio_path.stat.exists == False
   tags: 
   - android-studio
-
-# Complete install by executing $HOME/.local/android-studio/bin/studio.sh
 
 # Complete install by running android-studio
