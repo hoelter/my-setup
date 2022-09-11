@@ -1,0 +1,84 @@
+- name: Ensure local binary dir is created
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.local/bin"
+    state: directory
+  tags:
+  - android-studio
+
+- name: Install android studio dependencies
+  become: true
+  apt:
+    name:
+    - openjdk-11-jdk
+  tags: 
+  - android-studio
+
+- name: See if android studio has been previously downloaded
+  stat:
+    path: "{{ lookup('env', 'HOME') }}/.local/android-studio/bin/studio.sh"
+  register: android_studio_path
+  tags: 
+  - android-studio
+
+- name: "Fetch android studio dl page"
+  uri:
+    return_content: true
+    url: 'https://developer.android.com/studio'
+  register: android_studio_download_page
+  when:
+  - ansible_os_family != 'Windows'
+  - android_studio_path.stat.exists == False
+  tags: 
+  - android-studio
+
+- name: "Fetch android studio dl page"
+  uri:
+    return_content: true
+    url: 'https://developer.android.com/studio'
+  register: android_studio_download_page
+  when:
+  - ansible_os_family != 'Windows'
+  - android_studio_path.stat.exists == False
+  tags: 
+  - android-studio
+
+- name: "Find latest android studio version for linux"
+  set_fact:
+    android_studio_ver: '{{ android_studio_download_page.content | regex_search("android-studio-(.*)-linux.tar.gz") | regex_replace("android-studio-(.*)-linux.tar.gz", "\1") }}'
+  when:
+  - ansible_os_family != 'Windows'
+  - android_studio_path.stat.exists == False
+  tags: 
+  - android-studio
+
+# - name: Print version
+#   shell: 'echo "version is {{ android_studio_ver }}"'
+#   when: android_studio_ver is defined
+#   tags: 
+#   - android-studio
+
+- name: Download android studio and unarchive into .local
+  unarchive:
+    src: "https://dl.google.com/dl/android/studio/ide-zips/{{ android_studio_ver }}/android-studio-{{ android_studio_ver }}-linux.tar.gz"
+    dest: "{{ lookup('env', 'HOME') }}/.local"
+    remote_src: yes
+  when:
+  - ansible_os_family != 'Windows'
+  - android_studio_path.stat.exists == False
+  tags: 
+  - android-studio
+
+- name: Create binary symlink for android studio
+  file:
+    src: "{{ lookup('env', 'HOME') }}/.local/android-studio/bin/studio.sh"
+    path: "{{ lookup('env', 'HOME') }}/.local/bin/android-studio"
+    state: link
+  when:
+  - ansible_os_family != 'Windows'
+  - android_studio_path.stat.exists == False
+  tags: 
+  - android-studio
+
+# Complete install by executing $HOME/.local/android-studio/bin/studio.sh
+
+# Complete install by running android-studio
