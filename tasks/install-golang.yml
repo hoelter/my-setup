@@ -1,23 +1,105 @@
 # nvim hex highlighting plugin support, pistol install
-- name: Add golang ppa
-  become: yes
-  apt_repository:
-    repo: ppa:longsleep/golang-backports
-    state: present
+# - name: Add golang ppa
+#   become: yes
+#   apt_repository:
+#     repo: ppa:longsleep/golang-backports
+#     state: present
+#   tags: 
+#   - ubuntu
+#   - core
+#   - golang
+#   - pistol
+
+# - name: Install golang
+#   become: yes
+#   apt:
+#     name: golang-go
+#   tags: 
+#   - ubuntu
+#   - core
+#   - golang
+#   - pistol
+
+- name: Ensure local binary dir is created
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.local/bin"
+    state: directory
+  tags:
+  - ubuntu
+  - core
+  - golang
+  - pistol
+
+- name: Remove golang symlink if it exists
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.local/bin/go"
+    state: absent
   tags: 
   - ubuntu
   - core
   - golang
   - pistol
 
-- name: Install golang
-  become: yes
-  apt:
-    name: golang-go
+- name: Remove gofmt binary to bin
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.local/bin/gofmt"
+    state: absent
   tags: 
   - ubuntu
   - core
   - golang
   - pistol
 
-# Install pistol env CGO_ENABLED=1 GO111MODULE=on go install github.com/doronbehar/pistol/cmd/pistol@latest
+- name: Remove golang dir if it exists
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.local/go"
+    state: absent
+  tags:
+  - ubuntu
+  - core
+  - golang
+  - pistol
+
+# - name: Remove gopath dir if it exists
+#   file:
+#     path: "{{ lookup('env', 'HOME') }}/.go"
+#     state: absent
+#   tags: 
+#   - ubuntu
+#   - core
+#   - golang
+#   - pistol
+
+- name: Download golang tarball and unarchive into local folder
+  unarchive:
+    # TODO: Make dynamic to grab latest version
+    src: https://go.dev/dl/go1.19.1.linux-amd64.tar.gz
+    dest: "{{ lookup('env', 'HOME') }}/.local"
+    remote_src: yes
+  tags: 
+  - ubuntu
+  - core
+  - golang
+  - pistol
+
+- name: Link go binary to bin
+  file:
+    src: "{{ lookup('env', 'HOME') }}/.local/go/bin/go"
+    path: "{{ lookup('env', 'HOME') }}/.local/bin/go"
+    state: link
+  tags: 
+  - ubuntu
+  - core
+  - golang
+  - pistol
+
+- name: Link gofmt binary to bin
+  file:
+    src: "{{ lookup('env', 'HOME') }}/.local/go/bin/gofmt"
+    path: "{{ lookup('env', 'HOME') }}/.local/bin/gofmt"
+    state: link
+  tags: 
+  - ubuntu
+  - core
+  - golang
+  - pistol
