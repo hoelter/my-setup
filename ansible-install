@@ -8,4 +8,5 @@ sudo apt install -y ansible git
 
 # execute playbook
 ansible-pull -K -U https://github.com/hoelter/my-setup.git -t ubuntu local.yml
-
+# Or run locally
+# ansible-playbook -K local.yml -t ubuntu

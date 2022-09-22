@@ -53,6 +53,7 @@
   become: true
   apt:
     deb: 'https://github.com/sharkdp/fd/releases/latest/download/fd_{{ fd_ver.stdout }}_{{ curr_arch.stdout }}.deb'
+    dpkg_options: 'force-overwrite'
   tags:
   - ubuntu
   - core
