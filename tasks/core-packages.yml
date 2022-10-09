@@ -7,6 +7,7 @@
     - direnv
     - moreutils # https://rentes.github.io/unix/utilities/2015/07/27/moreutils-package/
     - ppa-purge
+    - xclip
       #- httpie -- consider adding through install steps here: https://httpie.io/docs/cli/debian-and-ubuntu
   tags: 
   - ubuntu

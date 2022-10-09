@@ -5,7 +5,6 @@
   apt:
     deb: https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb
   tags:
-    - ubuntu
     - dotnet
 
 - name: Install dotnet required package
@@ -14,7 +13,6 @@
     update_cache: true
     name: apt-transport-https
   tags:
-    - ubuntu
     - dotnet
 
 - name: Install dotnet SDKs
@@ -27,6 +25,5 @@
     - dotnet-sdk-3.1
     - dotnet-sdk-2.1
   tags:
-    - ubuntu
     - dotnet
 

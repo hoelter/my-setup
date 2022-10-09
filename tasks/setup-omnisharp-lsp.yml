@@ -4,7 +4,6 @@
     path: /usr/local/bin/OmniSharp.dll
     state: absent
   tags: 
-  - ubuntu
   - omnisharp
 
 - name: Remove omnisharp binary dir if it exists
@@ -12,7 +11,6 @@
     path: "{{ lookup('env', 'HOME') }}/.local/omnisharp"
     state: absent
   tags:
-  - ubuntu
   - omnisharp
 
 - name: Ensure omnisharp dir target path exists
@@ -20,7 +18,6 @@
     path: "{{ lookup('env', 'HOME') }}/.local/omnisharp"
     state: directory
   tags: 
-  - ubuntu
   - omnisharp
 
 - name: Download omnisharp tarball and unarchive into local folder
@@ -30,7 +27,6 @@
     dest: "{{ lookup('env', 'HOME') }}/.local/omnisharp"
     remote_src: yes
   tags: 
-  - ubuntu
   - omnisharp
 
 - name: Link dll to common location for hard coded nvim config reference
@@ -40,7 +36,6 @@
     path: /usr/local/bin/OmniSharp.dll
     state: link
   tags: 
-  - ubuntu
   - omnisharp
 
 #- name: Ensure omnisharp dir exists for global settings
@@ -48,5 +43,4 @@
 #    path: "{{ lookup('env', 'HOME') }}/.omnisharp"
 #    state: directory
 #  tags: 
-#  - ubuntu
-#  - omnisharp
+##  - omnisharp
