@@ -1,3 +1,5 @@
+# On ubuntu 22, just run apt install dotnet6
+
 - name: Remove omnisharp dll symlink if it exists
   become: true
   file:
