@@ -6,7 +6,6 @@
   tags: 
   - ubuntu
   - fish
-  - node
 
 - name: Install fish
   become: yes
@@ -15,24 +14,23 @@
   tags: 
   - ubuntu
   - fish
-  - node
 
-- name: Assign fisher dir variable
-  stat:
-    path: "{{ lookup('env', 'HOME') }}/.config/fish/functions/fisher.fish"
-  register: fisher_func
-  tags: 
-  - ubuntu
-  - fish
-  - node
+# - name: Assign fisher dir variable
+#   stat:
+#     path: "{{ lookup('env', 'HOME') }}/.config/fish/functions/fisher.fish"
+#   register: fisher_func
+#   tags: 
+#   - ubuntu
+#   - fish
+#   - node
 
-- name: Install fisher plugin manager
-  shell: fish -c "curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher"
-  when: fisher_func.stat.exists == False
-  tags: 
-  - ubuntu
-  - fish
-  - node
+# - name: Install fisher plugin manager
+#   shell: fish -c "curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher"
+#   when: fisher_func.stat.exists == False
+#   tags: 
+#   - ubuntu
+#   - fish
+#   - node
 
 - name: Ensure conf.d directory created
   file:
@@ -41,10 +39,9 @@
   tags:
   - ubuntu
   - fish
-  - node
 
-- name: Update fisher plugins
-  shell: fish -c "fisher update"
-  when: fisher_func.stat.exists == True
-  tags:
-  - fish
+# - name: Update fisher plugins
+#   shell: fish -c "fisher update"
+#   when: fisher_func.stat.exists == True
+#   tags:
+#   - fish

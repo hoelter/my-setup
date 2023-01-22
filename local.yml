@@ -1,7 +1,7 @@
 - hosts: localhost
   connection: local
   vars:
-    node_version: 16
+    node_version: latest
   pre_tasks:
   - name: Update cache and ensure some core utils are installed
     become: yes
@@ -25,6 +25,7 @@
   - import_tasks: tasks/install-pistol.yml
   - import_tasks: tasks/neovim-compile.yml
   - import_tasks: tasks/neovim-install.yml
+  - import_tasks: tasks/asdf-install.yml
   - import_tasks: tasks/node.yml
   - import_tasks: tasks/npm-packages.yml
   - import_tasks: tasks/setup-dotnet.yml
@@ -36,4 +37,5 @@
   - import_tasks: tasks/install-netcoredbg.yml
   - import_tasks: tasks/android-studio-install.yml
   - import_tasks: tasks/rider-install.yml
+  - import_tasks: tasks/ruby-install.yml
 

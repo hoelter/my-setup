@@ -1,22 +1,52 @@
-- name: Ensure nvm dir exists for install
-  file:
-    path: "{{ lookup('env', 'HOME') }}/.local/share/nvm/"
-    state: directory
-  tags: 
-  - ubuntu
-  - node
+# - name: Ensure nvm dir exists for install
+#   file:
+#     path: "{{ lookup('env', 'HOME') }}/.local/share/nvm/"
+#     state: directory
+#   tags: 
+#   - ubuntu
+#   - node
 
-- name: Install fisher nvm plugin
+# - name: Install fisher nvm plugin
+#   shell: 
+#     cmd: fish -c 'fisher install jorgebucaran/nvm.fish'
+#   tags: 
+#   - ubuntu
+#   - node
+
+# - name: Install node with nvm
+#   shell: 
+#     cmd: fish -c 'nvm install {{ node_version }} && set -U nvm_default_version {{ node_version }}'
+#   tags: 
+#   - ubuntu
+#   - node
+
+# - name: Install node asdf dependencies
+#   become: true
+#   apt:
+#     name:
+#     - build-essential
+#   tags: 
+#   - ubuntu
+#   - node
+
+# TODO: Add check to skip if already installed
+- name: Install asdf-node
   shell: 
-    cmd: fish -c 'fisher install jorgebucaran/nvm.fish'
+    cmd: fish -c 'asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git'
   tags: 
   - ubuntu
   - node
 
-- name: Install node with nvm
+- name: Install node with asdf
   shell: 
-    cmd: fish -c 'nvm install {{ node_version }} && set -U nvm_default_version {{ node_version }}'
+    cmd: fish -c 'asdf install nodejs {{ node_version }}'
   tags: 
   - ubuntu
   - node
 
+- name: Set global node to same version
+  shell: 
+    cmd: fish -c 'asdf global nodejs {{ node_version }}'
+  tags: 
+  - ubuntu
+  - node
