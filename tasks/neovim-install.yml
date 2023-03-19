@@ -45,8 +45,8 @@
 
 - name: Download Neovim tarball and unarchive into local
   unarchive:
-    # src: https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
-    src: https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz
+    src: https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
+    # src: https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz
     dest: "{{ lookup('env', 'HOME') }}/.local"
     remote_src: yes
   tags: 

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
 
-docker run --rm --mount type=bind,source=$(pwd),target=/home/docker/my-setup,readonly -it my-setup bash -c "ansible-playbook -v -e 'ansible_become_pass=docker' -t '$1' my-setup/local.yml; bash"
+# podman run --rm --mount type=bind,source=$(pwd),target=/home/docker/my-setup,readonly -it my-setup bash -c "ansible-playbook -v -e 'ansible_become_pass=docker' -t '$1' my-setup/local.yml; bash"
+podman run --rm -v "$(pwd)":/home/docker/my-setup:ro,z -it my-setup bash -c "ansible-playbook -v -e 'ansible_become_pass=docker' -t '$1' my-setup/local.yml; bash"
 

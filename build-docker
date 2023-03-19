@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-docker build . --no-cache -t my-setup
+podman build . --no-cache -t my-setup
 

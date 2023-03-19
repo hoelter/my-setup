@@ -17,11 +17,10 @@
   - ubuntu
   - asdf
 
-- name: Clone asdf plugin manager
-  ansible.builtin.git:
-    repo: 'https://github.com/asdf-vm/asdf.git'
-    dest: "{{ lookup('env', 'HOME') }}/.asdf"
-    version: "v0.11.1"
+- name: Ensure completions directory created
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.config/fish/completions"
+    state: directory
   tags:
   - ubuntu
   - asdf

@@ -29,24 +29,32 @@
 #   - ubuntu
 #   - node
 
-# TODO: Add check to skip if already installed
-- name: Install asdf-node
+- name: Check if asdf is installed
+  stat:
+    path: "{{ lookup('env', 'HOME') }}/.asdf/plugins/node"
+  register: asdf_node
+  tags: 
+  - ubuntu
+  - node
+
+- name: Install asdf-node plugin
   shell: 
-    cmd: fish -c 'asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git'
+    cmd: "export PATH={{ lookup('env', 'HOME') }}/.asdf/bin:$PATH && {{ lookup('env', 'HOME') }}/.asdf/bin/asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git"
+  when: asdf_node.stat.exists == False
   tags: 
   - ubuntu
   - node
 
 - name: Install node with asdf
   shell: 
-    cmd: fish -c 'asdf install nodejs {{ node_version }}'
+    cmd: "export PATH={{ lookup('env', 'HOME') }}/.asdf/bin:$PATH && asdf install nodejs {{ node_version }}"
   tags: 
   - ubuntu
   - node
 
 - name: Set global node to same version
   shell: 
-    cmd: fish -c 'asdf global nodejs {{ node_version }}'
+    cmd: "export PATH={{ lookup('env', 'HOME') }}/.asdf/bin:$PATH && asdf global nodejs {{ node_version }}"
   tags: 
   - ubuntu
   - node
