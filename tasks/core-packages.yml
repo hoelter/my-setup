@@ -3,8 +3,8 @@
   apt:
     name:
     - build-essential
-    - keychain # wsl2 ssh agent persistence
-    - direnv
+    # - keychain # wsl2 ssh agent persistence
+    # - direnv
     - moreutils # https://rentes.github.io/unix/utilities/2015/07/27/moreutils-package/
     - ppa-purge
     # - xclip install on non-wsl linux system
