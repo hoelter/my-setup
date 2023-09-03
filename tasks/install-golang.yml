@@ -73,7 +73,7 @@
 - name: Download golang tarball and unarchive into local folder
   unarchive:
     # TODO: Make dynamic to grab latest version
-    src: https://go.dev/dl/go1.19.1.linux-amd64.tar.gz
+    src: https://go.dev/dl/go1.21.0.linux-amd64.tar.gz
     dest: "{{ lookup('env', 'HOME') }}/.local"
     remote_src: yes
   tags: 
