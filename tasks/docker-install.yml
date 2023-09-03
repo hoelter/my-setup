@@ -1,3 +1,11 @@
+- name: Remove binary symlink for docker-compose if it exists
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.local/bin/docker-compose"
+    state: absent
+  tags: 
+  - docker
+  - docker-compose
+
 - name: Assign docker path
   stat:
     path: "{{ lookup('env', 'HOME') }}/.docker/cli-plugins"
@@ -52,6 +60,7 @@
     state: directory
   tags: 
   - docker
+  - docker-compose
 
 - name: Register latest docker compose version
   shell: |
@@ -59,14 +68,25 @@
   register: compose_ver
   tags: 
   - docker
+  - docker-compose
 
 - name: Install Docker Compose to the plugins path
   shell: curl -SL https://github.com/docker/compose/releases/download/v{{ compose_ver.stdout }}/docker-compose-linux-x86_64 -o {{ lookup('env', 'HOME') }}/.docker/cli-plugins/docker-compose
   tags:
   - docker
+  - docker-compose
 
 - name: Install Docker Compose to the plugins path
   shell: chmod +x "{{ lookup('env', 'HOME') }}/.docker/cli-plugins/docker-compose"
   tags:
   - docker
+  - docker-compose
+
+- name: Create binary symlink if installing only docker-compose
+  file:
+    src: "{{ lookup('env', 'HOME') }}/.docker/cli-plugins/docker-compose"
+    path: "{{ lookup('env', 'HOME') }}/.local/bin/docker-compose"
+    state: link
+  tags: 
+  - docker-compose
 
