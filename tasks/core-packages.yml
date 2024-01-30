@@ -111,7 +111,7 @@
   become: true
   apt:
     # Only appears to have amd64 architecture
-    deb: 'https://github.com/BurntSushi/ripgrep/releases/latest/download/ripgrep_{{ rg_ver.stdout }}_amd64.deb'
+    deb: 'https://github.com/BurntSushi/ripgrep/releases/latest/download/ripgrep_{{ rg_ver.stdout }}-1_amd64.deb'
   tags:
   - ubuntu
   - core

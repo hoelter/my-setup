@@ -1,4 +1,5 @@
-FROM ubuntu:focal
+# FROM ubuntu:focal
+FROM docker.io/debian:bookworm
 
 ARG TAGS
 
