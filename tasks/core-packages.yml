@@ -4,7 +4,7 @@
     name:
     - build-essential
     - moreutils # https://rentes.github.io/unix/utilities/2015/07/27/moreutils-package/
-    - ppa-purge
+    # - ppa-purge # not in debian bookworm
     # - keychain # wsl2 ssh agent persistence
     # - direnv
     # - xclip install on non-wsl linux system
