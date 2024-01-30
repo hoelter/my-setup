@@ -1,11 +1,17 @@
-- name: Add fish ppa
-  become: yes
-  apt_repository:
-    repo: ppa:fish-shell/release-3
-    state: present
-  tags: 
-  - ubuntu
-  - fish
+# - name: Add fish ppa
+#   become: yes
+#   apt_repository:
+#     repo: ppa:fish-shell/release-3
+#     state: present
+#   tags: 
+#   - ubuntu
+#   - fish
+
+# Update for debian
+# echo 'deb http://download.opensuse.org/repositories/shells:/fish/Debian_12/ /' | sudo tee /etc/apt/sources.list.d/shells:fish.list
+# curl -fsSL https://download.opensuse.org/repositories/shells:fish/Debian_12/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/shells_fish.gpg > /dev/null
+# sudo apt update
+# sudo apt install fish
 
 - name: Install fish
   become: yes
