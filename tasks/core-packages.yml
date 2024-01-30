@@ -3,10 +3,10 @@
   apt:
     name:
     - build-essential
-    # - keychain # wsl2 ssh agent persistence
-    # - direnv
     - moreutils # https://rentes.github.io/unix/utilities/2015/07/27/moreutils-package/
     - ppa-purge
+    # - keychain # wsl2 ssh agent persistence
+    # - direnv
     # - xclip install on non-wsl linux system
       #- httpie -- consider adding through install steps here: https://httpie.io/docs/cli/debian-and-ubuntu
   tags: 
@@ -116,34 +116,3 @@
   - ubuntu
   - core
   - rg
-
-# May need these again at some point
-
-#- name: Install ripgrep
-#  become: true
-#  apt:
-#    name:
-#    - ripgrep
-#    #dpkg_options: 'force-overwrite'
-#  tags: 
-#  - ubuntu
-#  - core
-
-#- name: Assign path of fdfind
-#  shell: which fdfind
-#  register: fdfind_path
-#  tags: 
-#  - ubuntu
-#  - core
-#
-#- name: Link fdfind into .local bin with proper alias
-#  file:
-#    src: '{{ item.src_dir }}'
-#    path: "{{ lookup('env', 'HOME') }}/.local/bin/{{ item.dest_name }}"
-#    state: link
-#  with_items:
-#  - { src_dir: '{{ fdfind_path.stdout }}', dest_name: fd }
-#  tags: 
-#  - ubuntu
-#  - core
-
