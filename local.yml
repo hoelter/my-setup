@@ -21,10 +21,12 @@
   - import_tasks: tasks/fish.yml
   - import_tasks: tasks/fzf-install.yml
   - import_tasks: tasks/lf-listfiles-install.yml
+  - import_tasks: tasks/asdf-install.yml
+
   - import_tasks: tasks/dotfiles-setup.yml
   - import_tasks: tasks/neovim-install.yml
   - import_tasks: tasks/neovim-post-install.yml
-  - import_tasks: tasks/asdf-install.yml
+
   - import_tasks: tasks/node.yml
   - import_tasks: tasks/npm-packages.yml
 

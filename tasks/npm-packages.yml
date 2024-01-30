@@ -29,7 +29,6 @@
   shell: 
     cmd: "export PATH={{ lookup('env', 'HOME') }}/.asdf/shims:{{ lookup('env', 'HOME') }}/.asdf/bin:$PATH && npm install -g typescript typescript-language-server eslint_d prettier"
   tags: 
-  - ubuntu
   - npm-packages
 
 - name: Update global npm packages

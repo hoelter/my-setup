@@ -4,7 +4,6 @@
     path: "{{ lookup('env', 'HOME') }}/.asdf/plugins/node"
   register: asdf_node
   tags: 
-  - ubuntu
   - node
 
 - name: Install asdf-node plugin
@@ -12,19 +11,16 @@
     cmd: "export PATH={{ lookup('env', 'HOME') }}/.asdf/bin:$PATH && {{ lookup('env', 'HOME') }}/.asdf/bin/asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git"
   when: asdf_node.stat.exists == False
   tags: 
-  - ubuntu
   - node
 
 - name: Install node with asdf
   shell: 
     cmd: "export PATH={{ lookup('env', 'HOME') }}/.asdf/bin:$PATH && asdf install nodejs {{ node_version }}"
   tags: 
-  - ubuntu
   - node
 
 - name: Set global node to same version
   shell: 
     cmd: "export PATH={{ lookup('env', 'HOME') }}/.asdf/bin:$PATH && asdf global nodejs {{ node_version }}"
   tags: 
-  - ubuntu
   - node
