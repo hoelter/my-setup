@@ -1,0 +1,12 @@
+- name: Install core apt packages
+  become: true
+  apt:
+    name:
+    - build-essential
+    - moreutils # https://rentes.github.io/unix/utilities/2015/07/27/moreutils-package/
+    - xclip # comment out on wsl
+    # - ppa-purge # not in debian bookworm
+    # - direnv
+  tags: 
+  - debian-core
+  - core-apt

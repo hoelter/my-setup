@@ -15,7 +15,9 @@
     - pre
     - ubuntu
   tasks:
-  - import_tasks: tasks/core-packages.yml
+  - import_tasks: tasks/core-apt-packages.yml
+  - import_tasks: tasks/core-apt-packages.yml
+
   - import_tasks: tasks/tmux-install.yml
   - import_tasks: tasks/tmux-plugins-install.yml
   - import_tasks: tasks/fish.yml
@@ -32,8 +34,9 @@
 
   - import_tasks: tasks/setup-dotnet.yml
   - import_tasks: tasks/setup-omnisharp-lsp.yml
-  - import_tasks: tasks/neovim-compile.yml
   - import_tasks: tasks/install-golang.yml
+
+  - import_tasks: tasks/neovim-compile.yml
   - import_tasks: tasks/install-pistol.yml
   - import_tasks: tasks/githubcli.yml
   - import_tasks: tasks/docker-install.yml
