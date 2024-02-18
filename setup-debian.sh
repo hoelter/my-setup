@@ -3,6 +3,7 @@
 set -e
 
 echo "Setting up SSH authorized key"
+mkdir -p $HOME/.ssh
 echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM7PMYKl6naZDIBtWmVzlEPknCcdTW+9V3H9xNRQ3ymG ssh@christopherhoelter.com" > $HOME/.ssh/authorized_keys
 
 echo "Installing core apt packages"
