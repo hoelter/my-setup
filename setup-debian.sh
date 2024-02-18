@@ -35,7 +35,7 @@ brew install \
     lf
 
 echo "Installing dotfiles"
-git clone https://github.com/hoelter/.dotfiles.git $HOME/.dotfiles
+git clone -b debian-changes https://github.com/hoelter/.dotfiles.git $HOME/.dotfiles
 cd $HOME/.dotfiles/non-stowed-setup-scripts
 ./debian-desktop-install.sh
 
