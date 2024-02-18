@@ -65,7 +65,7 @@ echo "Installing desktop apt packages"
 sudo apt install -y \
     i3 \
     x11-xserver-utils `# installs xrandr` \
-    suckless-tools `# installs dmenu`\
+    suckless-tools `# installs dmenu` \
     dunst \
     lightdm \
     redshift \
