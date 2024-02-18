@@ -69,7 +69,8 @@ sudo apt install -y \
     lightdm \
     redshift \
     thunar \
-    pulseaudio
+    pulseaudio \
+    xterm
 
 echo "Complete i3 setup from dotfiles"
 ./copyinstall-i3-configs.sh
