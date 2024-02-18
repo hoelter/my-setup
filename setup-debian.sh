@@ -18,9 +18,8 @@ sudo apt install -y \
 
 echo "Installing homebrew"
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-(echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> /home/chris/.bashrc
+(echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> /home/$USER/.bashrc
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-brew update
 
 echo "Installing core homebrew packages"
 brew install \
@@ -41,6 +40,7 @@ cd $HOME/.dotfiles/
 ./debian-desktop-install
 
 echo "Completing fzf setup post dotfiles install"
+echo "Answers to prompts are y, y, n"
 "$(brew --prefix)"/opt/fzf/install
 
 echo "Installing secondary homebrew packages"
@@ -58,9 +58,14 @@ sudo apt install -y \
     dunst \
     lightdm \
     redshift \
-    thunar
+    thunar \
+    pulseaudio \
+    pactl
 
 echo "Installing flatpak"
 sudo apt install -y flatpak
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-echo "Neet to reboot before flatpak apps can be installed"
+echo "Need to reboot before flatpak apps can be installed."
+
+echo "Setup script complete, reboot now."
+
