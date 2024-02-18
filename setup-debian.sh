@@ -47,6 +47,10 @@ echo "Install asdf tool version manager v14"
 git clone https://github.com/asdf-vm/asdf.git $HOME/.asdf --branch v0.14.0
 ln -s $HOME/.asdf/completions/asdf.fish $HOME/.config/fish/completions/asdf 
 
+echo "Install tmux plugin manager"
+mkdir -p $HOME/.local/share/tmux/plugins
+git clone https://github.com/tmux-plugins/tpm $HOME/.local/share/tmux/plugins/tpm
+
 echo "Installing secondary homebrew packages"
 # To enable autostart of these services, run 'brew services start syncthing && brew services start tailscale'
 brew install \
