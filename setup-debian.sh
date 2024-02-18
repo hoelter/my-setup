@@ -53,6 +53,8 @@ brew install \
     syncthing \
     tailscale
 
+# Comment out from here to below to skip desktop package installations
+
 echo "Installing desktop apt packages"
 # consider additional apt packages: feh azote
 sudo apt install -y \
@@ -63,8 +65,7 @@ sudo apt install -y \
     lightdm \
     redshift \
     thunar \
-    pulseaudio \
-    pactl
+    pulseaudio
 
 echo "Complete i3 setup from dotfiles"
 ./copyinstall-i3-configs.sh
