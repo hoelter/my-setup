@@ -35,13 +35,17 @@ brew install \
     lf
 
 echo "Installing dotfiles"
-git clone -b debian-changes https://github.com/hoelter/.dotfiles.git $HOME/.dotfiles
+git clone https://github.com/hoelter/.dotfiles.git $HOME/.dotfiles --branch debian-changes
 cd $HOME/.dotfiles/non-stowed-setup-scripts
 ./debian-desktop-install.sh
 
 echo "Completing fzf setup post dotfiles install"
 echo "Answers to prompts are y, y, n"
 "$(brew --prefix)"/opt/fzf/install
+
+echo "Install asdf tool version manager v14"
+git clone https://github.com/asdf-vm/asdf.git $HOME/.asdf --branch v0.14.0
+ln -s $HOME/.asdf/completions/asdf.fish $HOME/.config/fish/completions/asdf 
 
 echo "Installing secondary homebrew packages"
 # To enable autostart of these services, run 'brew services start syncthing && brew services start tailscale'
