@@ -2,8 +2,8 @@
 
 set -e
 
-echo "Setting up user directories"
-mkdir -p $HOME/.local/bin
+echo "Setting up SSH authorized key"
+echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM7PMYKl6naZDIBtWmVzlEPknCcdTW+9V3H9xNRQ3ymG ssh@christopherhoelter.com" > $HOME/.ssh/authorized_keys
 
 echo "Installing core apt packages"
 sudo apt install -y \
