@@ -18,7 +18,7 @@ sudo apt install -y \
 
 echo "Installing homebrew"
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-(echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> /home/docker/.profile
+(echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> /home/chris/.bashrc
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 brew update
 
