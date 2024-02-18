@@ -77,7 +77,7 @@ echo "Complete i3 setup from dotfiles"
 
 echo "Installing flatpak"
 sudo apt install -y flatpak
-flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 echo "Need to reboot before flatpak apps can be installed."
 echo "Setup script complete, reboot now."
 
