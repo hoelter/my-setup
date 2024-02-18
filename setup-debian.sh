@@ -36,8 +36,8 @@ brew install \
 
 echo "Installing dotfiles"
 git clone https://github.com/hoelter/.dotfiles.git $HOME/.dotfiles
-cd $HOME/.dotfiles/
-./debian-desktop-install
+cd $HOME/.dotfiles/non-stowed-setup-scripts
+./debian-desktop-install.sh
 
 echo "Completing fzf setup post dotfiles install"
 echo "Answers to prompts are y, y, n"
@@ -62,10 +62,12 @@ sudo apt install -y \
     pulseaudio \
     pactl
 
+echo "Complete i3 setup from dotfiles"
+./copyinstall-i3-configs.sh
+
 echo "Installing flatpak"
 sudo apt install -y flatpak
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 echo "Need to reboot before flatpak apps can be installed."
-
 echo "Setup script complete, reboot now."
 
