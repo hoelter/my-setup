@@ -33,7 +33,8 @@ brew install \
     fd \
     ripgrep \
     bat \
-    lf
+    lf \
+    syncthing
 
 echo "Installing dotfiles"
 git clone https://github.com/hoelter/.dotfiles.git $HOME/.dotfiles --branch debian-changes
@@ -52,14 +53,20 @@ echo "Install tmux plugin manager"
 mkdir -p $HOME/.local/share/tmux/plugins
 git clone https://github.com/tmux-plugins/tpm $HOME/.local/share/tmux/plugins/tpm
 
-echo "Installing secondary homebrew packages"
-# To enable autostart of these services, run 'brew services start syncthing && brew services start tailscale'
-brew install \
-    syncthing \
-    tailscale
+echo "Installing tailscale"
+# https://tailscale.com/kb/1174/install-debian-bookworm
+curl -fsSL https://pkgs.tailscale.com/stable/debian/bookworm.noarmor.gpg | sudo tee /usr/share/keyrings/tailscale-archive-keyring.gpg >/dev/null
+curl -fsSL https://pkgs.tailscale.com/stable/debian/bookworm.tailscale-keyring.list | sudo tee /etc/apt/sources.list.d/tailscale.list
+sudo apt update && sudo apt install tailscale
+# sudo tailscale up to start
+
+echo "Setting up distrobox"
+sudo apt install -y distrobox
+# git clone https://github.com/89luca89/distrobox $HOME/.distrobox --depth 1 --branch 1.6.0.1
+mkdir -p $HOME/.distroboxes/desktop-arch
+distrobox create --pull --image docker.io/library/archlinux:latest --name desktop-arch --home $HOME/.distrboxes/desktop-arch --pre-init-hooks "pacman -S zathura" --init-hooks "distrobox-export --app zathura"
 
 # Comment out from here to below to skip desktop package installations
-
 echo "Installing desktop apt packages"
 # consider additional apt packages: feh azote
 sudo apt install -y \
@@ -72,7 +79,8 @@ sudo apt install -y \
     thunar \
     pulseaudio \
     xterm \
-    bluetooth
+    bluetooth \
+    distrobox
 
 echo "Complete i3 setup from dotfiles"
 ./copyinstall-i3-configs.sh
