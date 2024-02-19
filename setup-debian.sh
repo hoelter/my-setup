@@ -38,7 +38,7 @@ brew install \
 echo "Installing dotfiles"
 git clone https://github.com/hoelter/.dotfiles.git $HOME/.dotfiles --branch debian-changes
 cd $HOME/.dotfiles/non-stowed-setup-scripts
-./debian-desktop-install.sh
+./install-desktop.sh
 
 echo "Completing fzf setup post dotfiles install"
 echo "Answers to prompts are y, y, n"
