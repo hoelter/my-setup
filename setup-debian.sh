@@ -62,9 +62,9 @@ sudo apt update && sudo apt install tailscale
 
 echo "Setting up distrobox"
 sudo apt install -y distrobox
-# git clone https://github.com/89luca89/distrobox $HOME/.distrobox --depth 1 --branch 1.6.0.1
 mkdir -p $HOME/.distroboxes/desktop-arch
-distrobox create --pull --image docker.io/library/archlinux:latest --name desktop-arch --home $HOME/.distrboxes/desktop-arch --pre-init-hooks "pacman -S zathura" --init-hooks "distrobox-export --app zathura"
+distrobox create --pull --image docker.io/library/archlinux:latest --name desktop-arch --home $HOME/.distrboxes/desktop-arch
+# distrobox create --pull --image docker.io/library/archlinux:latest --name desktop-arch --home $HOME/.distrboxes/desktop-arch --init-hooks "pacman -S zathura && distrobox-export --app zathura"
 
 # Comment out from here to below to skip desktop package installations
 echo "Installing desktop apt packages"
