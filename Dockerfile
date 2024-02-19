@@ -8,12 +8,8 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt update && apt install -y \
     sudo \
-    curl \
-    git \
-    build-essential \
-    software-properties-common \
-    && apt-add-repository -y --update ppa:ansible/ansible \
-    && apt install -y ansible
+    tzdata \
+    curl
 
 ENV HOME /home/docker
 ENV USER docker

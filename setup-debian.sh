@@ -71,7 +71,8 @@ sudo apt install -y \
     redshift \
     thunar \
     pulseaudio \
-    xterm
+    xterm \
+    bluetooth
 
 echo "Complete i3 setup from dotfiles"
 ./copyinstall-i3-configs.sh
