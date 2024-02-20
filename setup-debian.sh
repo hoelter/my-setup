@@ -62,13 +62,13 @@ echo "Installing tailscale"
 # https://tailscale.com/kb/1174/install-debian-bookworm
 curl -fsSL https://pkgs.tailscale.com/stable/debian/bookworm.noarmor.gpg | sudo tee /usr/share/keyrings/tailscale-archive-keyring.gpg >/dev/null
 curl -fsSL https://pkgs.tailscale.com/stable/debian/bookworm.tailscale-keyring.list | sudo tee /etc/apt/sources.list.d/tailscale.list
-sudo apt update && sudo apt install tailscale
-# sudo tailscale up to start
+sudo apt update && sudo apt install -y tailscale
 
-# echo "Setting up distrobox"
-# sudo apt install -y distrobox
-# mkdir -p $HOME/.distroboxes/desktop-arch
-# distrobox create --pull --image docker.io/library/archlinux:latest --name desktop-arch --home $HOME/.distrboxes/desktop-arch
+# Comment out from here if distrobox isn't needed
+echo "Setting up distrobox"
+sudo apt install -y distrobox
+mkdir -p $HOME/.distroboxes/desktop-arch
+distrobox create --pull --image docker.io/library/archlinux:latest --name desktop-arch --home $HOME/.distrboxes/desktop-arch
 
 # Comment out from here to below to skip desktop package installations
 echo "Installing desktop apt packages"
@@ -83,8 +83,7 @@ sudo apt install -y \
     thunar \
     pulseaudio \
     xterm \
-    bluetooth \
-    distrobox
+    bluetooth
 
 echo "Complete i3 setup from dotfiles"
 ./copyinstall-i3-configs.sh

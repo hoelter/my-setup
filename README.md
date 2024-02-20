@@ -1,13 +1,16 @@
-# Automated dev env setup
-This repo contains scripts and ansible tasks to automate the setup of an ubuntu instance, primarily targeting ubuntu 20.04 on wsl2.
-A step in this process will clone down my dotfiles repository and symlink those files and run some other configuration scripts.
-Use at your own risk!
+# My environment setup
 
-## Remote Setup
-- Run this to start the setup for ubuntu with ansible remotely.
-`bash <(curl -s https://raw.githubusercontent.com/hoelter/my-setup/master/ansible-install)`
+This repository holds some scripts I use to assist in setting up my workstation.
 
-## Local Setup
-- Ensure ansible is installed, clone down this repository, and run the ansible command to install with the tag 'ubuntu'.
-- Some tasks may only run when targeted specifically, they will not have the 'ubuntu' tag.
+## To Setup a Debian Desktop Env
 
+Before running these commands, you'll likely want to to tweak the setup scripts, like removing the ssh authorized key.
+
+Curl and execute the install script
+`bash <(curl -s https://raw.githubusercontent.com/hoelter/my-setup/debian/setup-debian.sh)`
+
+After reboot, curl and setup flatpaks (while in a bash shell)
+`bash <(curl -s https://raw.githubusercontent.com/hoelter/my-setup/debian/setup-debian-flatpaks.sh)`
+
+This script can be used to setup a headless environment as well, just comment out everything down in the script
+where it states the desktop section starts.
