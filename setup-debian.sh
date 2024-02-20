@@ -6,12 +6,17 @@ echo "Setting up SSH authorized key"
 mkdir -p $HOME/.ssh
 echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM7PMYKl6naZDIBtWmVzlEPknCcdTW+9V3H9xNRQ3ymG ssh@christopherhoelter.com" > $HOME/.ssh/authorized_keys
 
+echo "Stop debian from modifying /etc/resolv.conf"
+sudo sh -c "echo 'make_resolv_conf() { :; }' > /etc/dhcp/dhclient-enter-hooks.d/leave_my_resolv_conf_alone" || true
+sudo chmod 755 /etc/dhcp/dhclient-enter-hooks.d/leave_my_resolv_conf_alone || true
+
 echo "Installing core apt packages"
 sudo apt install -y \
     git \
     curl \
     build-essential \
     moreutils \
+    systemd-resolved \
     xclip \
     stow \
     podman \
@@ -60,11 +65,10 @@ curl -fsSL https://pkgs.tailscale.com/stable/debian/bookworm.tailscale-keyring.l
 sudo apt update && sudo apt install tailscale
 # sudo tailscale up to start
 
-echo "Setting up distrobox"
-sudo apt install -y distrobox
-mkdir -p $HOME/.distroboxes/desktop-arch
-distrobox create --pull --image docker.io/library/archlinux:latest --name desktop-arch --home $HOME/.distrboxes/desktop-arch
-# distrobox create --pull --image docker.io/library/archlinux:latest --name desktop-arch --home $HOME/.distrboxes/desktop-arch --init-hooks "pacman -S zathura && distrobox-export --app zathura"
+# echo "Setting up distrobox"
+# sudo apt install -y distrobox
+# mkdir -p $HOME/.distroboxes/desktop-arch
+# distrobox create --pull --image docker.io/library/archlinux:latest --name desktop-arch --home $HOME/.distrboxes/desktop-arch
 
 # Comment out from here to below to skip desktop package installations
 echo "Installing desktop apt packages"
