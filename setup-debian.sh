@@ -14,6 +14,7 @@ echo "Installing core apt packages"
 sudo apt install -y \
     git \
     curl \
+    ca-certificates \
     build-essential \
     moreutils \
     systemd-resolved \
@@ -70,6 +71,19 @@ sudo apt install -y distrobox
 mkdir -p $HOME/.distroboxes/desktop-arch
 distrobox create --pull --image docker.io/library/archlinux:latest --name desktop-arch --home $HOME/.distrboxes/desktop-arch
 
+# Install docker and docker-compose in addition to podman
+echo "Installing docker and docker-compose"
+# https://docs.docker.com/engine/install/debian/
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt update
+sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
 # Comment out from here to below to skip desktop package installations
 echo "Installing desktop apt packages"
 # consider additional apt packages: feh azote
@@ -83,7 +97,8 @@ sudo apt install -y \
     thunar \
     pulseaudio \
     xterm \
-    bluetooth
+    bluetooth \
+    bc
 
 echo "Complete i3 setup from dotfiles"
 ./copyinstall-i3-configs.sh
