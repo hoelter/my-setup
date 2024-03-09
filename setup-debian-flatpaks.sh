@@ -8,7 +8,8 @@ flatpak install --user -y flathub \
     com.google.Chrome \
     com.spotify.Client \
     org.pulseaudio.pavucontrol \
-    org.flameshot.Flameshot
+    org.flameshot.Flameshot \
+    io.dbeaver.DBeaverCommunity
 
 echo "Flatpaks installed"
 
