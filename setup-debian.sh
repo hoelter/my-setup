@@ -31,7 +31,6 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 echo "Installing core homebrew packages"
 brew install \
-    gcc \
     fish \
     tmux \
     urlview `# for tmux plugin support` \
@@ -41,6 +40,7 @@ brew install \
     ripgrep \
     bat \
     lf \
+    jq \
     syncthing
 
 echo "Installing dotfiles"
@@ -100,7 +100,8 @@ sudo apt install -y \
     pulseaudio \
     xterm \
     bluetooth \
-    bc
+    bc \
+    xinput
 
 echo "Complete i3 setup from dotfiles"
 ./copyinstall-i3-configs.sh
