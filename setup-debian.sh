@@ -44,7 +44,7 @@ brew install \
     syncthing
 
 echo "Installing dotfiles"
-git clone https://github.com/hoelter/.dotfiles.git $HOME/.dotfiles --branch debian-changes
+git clone https://github.com/hoelter/.dotfiles.git $HOME/.dotfiles --branch master
 cd $HOME/.dotfiles/non-stowed-setup-scripts
 ./install-desktop.sh
 
