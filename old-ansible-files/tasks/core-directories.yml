@@ -1,8 +1,0 @@
-- name: Ensure .local bin folder exists
-  file:
-    path: "{{ lookup('env', 'HOME') }}/.local/bin"
-    state: directory
-  tags: 
-  - debian-core
-  - core-directories
-
