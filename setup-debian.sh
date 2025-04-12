@@ -68,10 +68,10 @@ curl -fsSL https://pkgs.tailscale.com/stable/debian/bookworm.tailscale-keyring.l
 sudo apt update && sudo apt install -y tailscale
 
 # Comment out from here if distrobox isn't needed
-echo "Setting up distrobox"
-sudo apt install -y distrobox
-mkdir -p $HOME/.distroboxes/desktop-arch
-distrobox create --pull --image docker.io/library/archlinux:latest --name desktop-arch --home $HOME/.distroboxes/desktop-arch
+# echo "Setting up distrobox"
+# sudo apt install -y distrobox
+# mkdir -p $HOME/.distroboxes/desktop-arch
+# distrobox create --pull --image docker.io/library/archlinux:latest --name desktop-arch --home $HOME/.distroboxes/desktop-arch
 
 # Install docker and docker-compose in addition to podman
 echo "Installing docker and docker-compose"
