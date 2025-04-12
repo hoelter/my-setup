@@ -52,9 +52,10 @@ echo "Completing fzf setup post dotfiles install"
 echo "Answers to prompts are y, y, n"
 "$(brew --prefix)"/opt/fzf/install
 
-echo "Install asdf tool version manager v14"
-git clone https://github.com/asdf-vm/asdf.git $HOME/.asdf --branch v0.14.0
-ln -s $HOME/.asdf/completions/asdf.fish $HOME/.config/fish/completions/asdf 
+# This has changed in v16 -- need to update this https://asdf-vm.com/guide/getting-started.html
+# echo "Install asdf tool version manager v14"
+# git clone https://github.com/asdf-vm/asdf.git $HOME/.asdf --branch v0.14.0
+# ln -s $HOME/.asdf/completions/asdf.fish $HOME/.config/fish/completions/asdf 
 
 echo "Install tmux plugin manager"
 mkdir -p $HOME/.local/share/tmux/plugins
