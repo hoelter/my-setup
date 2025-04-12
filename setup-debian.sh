@@ -70,7 +70,7 @@ sudo apt update && sudo apt install -y tailscale
 echo "Setting up distrobox"
 sudo apt install -y distrobox
 mkdir -p $HOME/.distroboxes/desktop-arch
-distrobox create --pull --image docker.io/library/archlinux:latest --name desktop-arch --home $HOME/.distrboxes/desktop-arch
+distrobox create --pull --image docker.io/library/archlinux:latest --name desktop-arch --home $HOME/.distroboxes/desktop-arch
 
 # Install docker and docker-compose in addition to podman
 echo "Installing docker and docker-compose"
