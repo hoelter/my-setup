@@ -103,7 +103,8 @@ sudo apt install -y \
     pulseaudio \
     pulseaudio-module-bluetooth \
     bc \
-    xinput
+    xinput \
+    unzip
 
 echo "Complete i3 setup from dotfiles"
 ./copyinstall-i3-configs.sh
