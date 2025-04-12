@@ -21,7 +21,7 @@ sudo apt install -y \
     xclip \
     stow \
     podman \
-    htop \
+    unzip \
     ethtool
 
 echo "Installing homebrew"
@@ -103,8 +103,7 @@ sudo apt install -y \
     pulseaudio \
     pulseaudio-module-bluetooth \
     bc \
-    xinput \
-    unzip
+    xinput
 
 echo "Complete i3 setup from dotfiles"
 ./copyinstall-i3-configs.sh
