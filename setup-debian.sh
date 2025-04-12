@@ -98,9 +98,10 @@ sudo apt install -y \
     lightdm \
     redshift \
     thunar \
-    pulseaudio \
     xterm \
     bluetooth \
+    pulseaudio \
+    pulseaudio-module-bluetooth \
     bc \
     xinput
 
